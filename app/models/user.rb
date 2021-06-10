@@ -13,7 +13,7 @@ class User < ApplicationRecord
       validates :first_name_reading
     end
 
-    with_options format: { with: /\A[ぁ-んァ-ン一-龥]/, message: 'is invalid. Input full-width characters.' } do
+    with_options format: { with: /\A[ぁ-んァ-ン一-龥々]+\z/, message: 'is invalid. Input full-width characters.' } do
       validates :last_name
       validates :first_name
     end

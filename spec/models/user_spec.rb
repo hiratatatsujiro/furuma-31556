@@ -152,6 +152,24 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('Last name reading is invalid. Input full-width katakana characters.')
     end
 
+    it 'last_name_readingが全角ひらがなと登録できない' do
+      @user.last_name_reading = 'ひらた'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Last name reading is invalid. Input full-width katakana characters.')
+    end
+
+    it 'last_name_readingが全角英字だと登録できない' do
+      @user.last_name_reading = 'ｂｆｃ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Last name reading is invalid. Input full-width katakana characters.')
+    end
+
+    it 'last_name_readingが全角数字だと登録できない' do
+      @user.last_name_reading = '１１１'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Last name reading is invalid. Input full-width katakana characters.')
+    end
+
     it 'first_name_readingが空だと登録できない' do
       @user.first_name_reading = ''
       @user.valid?
@@ -172,6 +190,24 @@ RSpec.describe User, type: :model do
 
     it 'first_name_readingが半角英字だと登録できない' do
       @user.first_name_reading = 'aaa'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('First name reading is invalid. Input full-width katakana characters.')
+    end
+
+    it 'first_name_readingが全角ひらがなだと登録できない' do
+      @user.first_name_reading = 'ひらた'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('First name reading is invalid. Input full-width katakana characters.')
+    end
+
+    it 'first_name_readingが全角英字だと登録できない' do
+      @user.first_name_reading = 'ｓｄｇ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('First name reading is invalid. Input full-width katakana characters.')
+    end
+
+    it 'first_name_readingが全角数字だと登録できない' do
+      @user.first_name_reading = '１１１'
       @user.valid?
       expect(@user.errors.full_messages).to include('First name reading is invalid. Input full-width katakana characters.')
     end
