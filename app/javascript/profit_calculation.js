@@ -1,12 +1,13 @@
 function profit_calculation(){
 const item_price = document.getElementById("item-price");
+if (!item_price){ return false;}
 item_price.addEventListener("input", () => {
   const add_tax_price = document.getElementById("add-tax-price");
   const profit = document.getElementById("profit");
-  const sales = 0.1;
-  const commission = item_price.value * sales;
-  add_tax_price.innerHTML = commission;
-  profit.innerHTML = item_price.value - commission;
+  const fee = 0.1;
+  const sales_commission = item_price.value * fee;
+  add_tax_price.innerHTML = sales_commission;
+  profit.innerHTML = item_price.value - sales_commission;
 });
 };
 
