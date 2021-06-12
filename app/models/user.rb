@@ -18,9 +18,7 @@ class User < ApplicationRecord
       validates :last_name
       validates :first_name
     end
-    
   end
   validates :password,
-                format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/, message: 'is invalid. Include both letters and numbers' }
-                     
- end
+            format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/, message: 'is invalid. Include both letters and numbers' }
+end

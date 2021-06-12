@@ -6,38 +6,38 @@ RSpec.describe Item, type: :model do
     @item.image = fixture_file_upload('public/image/output-image1.png')
   end
 
-  context "内容に問題がない場合" do
-    it "全て正しく入力されていれば登録できる" do
+  context '内容に問題がない場合' do
+    it '全て正しく入力されていれば登録できる' do
       expect(@item).to be_valid
     end
   end
 
-  context "内容に問題がある場合" do
-    it "imageが空の場合は登録できない" do
+  context '内容に問題がある場合' do
+    it 'imageが空の場合は登録できない' do
       @item.image = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Image can't be blank")
     end
 
-    it "nameが空の場合は登録できない" do
-      @item.name = ""
+    it 'nameが空の場合は登録できない' do
+      @item.name = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Name can't be blank")
     end
 
-    it "nameは40字以上の場合は登録できない" do
-      @item.name = "私が大切に育ててきたカボチャ、私が大切に育ててきた大根、私が大切に育ててきたジャガイモ、私が大切に育ててきたトマト"
+    it 'nameは40字以上の場合は登録できない' do
+      @item.name = '私が大切に育ててきたカボチャ、私が大切に育ててきた大根、私が大切に育ててきたジャガイモ、私が大切に育ててきたトマト'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Name is too long (maximum is 40 characters)")
+      expect(@item.errors.full_messages).to include('Name is too long (maximum is 40 characters)')
     end
 
-    it "introduceが空の場合は登録できない" do
-      @item.introduce = ""
+    it 'introduceが空の場合は登録できない' do
+      @item.introduce = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Introduce can't be blank")
     end
 
-    it "introduceが1000字以上の場合は登録できない" do
+    it 'introduceが1000字以上の場合は登録できない' do
       @item.introduce = "スーツケースを格安で購入する場合、皆さんならまずスーツケースのどの部分を見ますか？
       スーツケースを選ぶ際に抑えておきたいポイントは「デザイン」「重さ」「大きさ」「ブランド」の4つです。
       格安で購入するためにはその4つのポイントのどの点を妥協するか、ということになります。まずは、4つの
@@ -62,100 +62,97 @@ RSpec.describe Item, type: :model do
       以上のポイントから、何を妥協すべきか、妥協できるのかを考えて購入すると、
       自分にあったお得な格安スーツケースが購入できるでしょう。（1031文字）"
       @item.valid?
-      expect(@item.errors.full_messages).to include("Introduce is too long (maximum is 1000 characters)")
+      expect(@item.errors.full_messages).to include('Introduce is too long (maximum is 1000 characters)')
     end
 
-    it "category_idが1の場合は登録できない" do
+    it 'category_idが1の場合は登録できない' do
       @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
 
-    it "status_idが1の場合は登録できない" do
+    it 'status_idが1の場合は登録できない' do
       @item.status_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Status can't be blank")
     end
 
-    it "pay_for_shopping_idが1の場合は登録できない" do
+    it 'pay_for_shopping_idが1の場合は登録できない' do
       @item.pay_for_shopping_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Pay for shopping can't be blank")  
+      expect(@item.errors.full_messages).to include("Pay for shopping can't be blank")
     end
 
-    it "delivery_area_idが1の場合は登録できない" do
+    it 'delivery_area_idが1の場合は登録できない' do
       @item.delivery_area_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Delivery area can't be blank")  
+      expect(@item.errors.full_messages).to include("Delivery area can't be blank")
     end
 
-    it "days_to_ship_idが1の場合は登録できない" do
+    it 'days_to_ship_idが1の場合は登録できない' do
       @item.days_to_ship_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Days to ship can't be blank")  
+      expect(@item.errors.full_messages).to include("Days to ship can't be blank")
     end
 
-    it "priceが空の場合は登録できない" do
-      @item.price = ""
+    it 'priceが空の場合は登録できない' do
+      @item.price = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")
     end
 
-    it "priceが299円以下の場合は登録できない" do
+    it 'priceが299円以下の場合は登録できない' do
       @item.price = 299
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price is out of setting range")
+      expect(@item.errors.full_messages).to include('Price is out of setting range')
     end
 
-    it "priceが10,000,000円以上の場合は登録できない" do
-      @item.price = 10000000
+    it 'priceが10,000,000円以上の場合は登録できない' do
+      @item.price = 10_000_000
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price is out of setting range")
+      expect(@item.errors.full_messages).to include('Price is out of setting range')
     end
 
-    it "priceは半角英字の場合は登録できない" do
-      @item.price = "aaaaa"
+    it 'priceは半角英字の場合は登録できない' do
+      @item.price = 'aaaaa'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Input half-width characters.")
+      expect(@item.errors.full_messages).to include('Price Input half-width characters.')
     end
 
-    it "priceは半角カタカナの場合は登録できない" do
-      @item.price = "ﾋﾗﾀ"
+    it 'priceは半角カタカナの場合は登録できない' do
+      @item.price = 'ﾋﾗﾀ'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Input half-width characters.")
+      expect(@item.errors.full_messages).to include('Price Input half-width characters.')
     end
 
-    it "priceは全角カタカナの場合は登録できない" do
-      @item.price = "ヒラタ"
+    it 'priceは全角カタカナの場合は登録できない' do
+      @item.price = 'ヒラタ'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Input half-width characters.")
+      expect(@item.errors.full_messages).to include('Price Input half-width characters.')
     end
 
-    it "priceは全角ひらがなの場合は登録できない" do
-      @item.price = "ひらた"
+    it 'priceは全角ひらがなの場合は登録できない' do
+      @item.price = 'ひらた'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Input half-width characters.")
+      expect(@item.errors.full_messages).to include('Price Input half-width characters.')
     end
 
-    it "priceは全角英字の場合は登録できない" do
-      @item.price = "ｓｓｓ"
+    it 'priceは全角英字の場合は登録できない' do
+      @item.price = "\bｓｓｓ"
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Input half-width characters.")
+      expect(@item.errors.full_messages).to include('Price Input half-width characters.')
     end
 
-    it "priceは全角数字の場合は登録できない" do
-      @item.price = "１１１１１"
+    it 'priceは全角数字の場合は登録できない' do
+      @item.price = '１１１１１'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Input half-width characters.")
+      expect(@item.errors.full_messages).to include('Price Input half-width characters.')
     end
 
-    it "userが紐付いていなければ登録できない" do
+    it 'userが紐付いていなければ登録できない' do
       @item.user = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("User must exist")
+      expect(@item.errors.full_messages).to include('User must exist')
     end
-
-
   end
- 
 end
