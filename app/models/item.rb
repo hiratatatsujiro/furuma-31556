@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :status
   belongs_to :pay_for_shopping
   belongs_to :delivery_area
-  belongs_to :days_to_ship
+  belongs_to :day_to_ship
 
   with_options presence: true do
     validates :image
@@ -18,11 +18,11 @@ class Item < ApplicationRecord
             numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                             message: 'is out of setting range' }
 
-  with_options numericality: { other_than: 1, message: "can't be blank" } do
+  with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :status_id
     validates :pay_for_shopping_id
     validates :delivery_area_id
-    validates :days_to_ship_id
+    validates :day_to_ship_id
   end
 end

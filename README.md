@@ -51,7 +51,7 @@ Things you may want to cover:
 | status_id           | integer    | null: false       |
 | pay_for_shopping_id | integer    | null: false       |
 | delivery_area_id    | integer    | null: false       |
-| days_to_ship_id     | integer    | null: false       |
+| day_to_ship_id     | integer    | null: false       |
 | price               | integer    | null: false       |
 | user                | references | foreign_key: true |
 
