@@ -1,7 +1,7 @@
 class PurchaseShopping
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :token, :postal_code, :delivery_area_id, :city, :house_number, :building, :phone_number,
-                :purchase_id
+  attr_accessor :user_id, :item_id, :token, :postal_code, :delivery_area_id, :city, :house_number, :building, :phone_number
+                
 
   with_options presence: true do
     validates :token

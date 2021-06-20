@@ -11,6 +11,11 @@ RSpec.describe PurchaseShopping, type: :model do
     it 'tokenと住所情報等が適切に入力されていれば登録できる' do
       expect(@purchase_shopping).to be_valid
     end
+
+    it 'buildingがなくても登録できる' do
+      @purchase_shopping.building = ""
+      expect(@purchase_shopping).to be_valid
+    end
   end
 
   context '内容に問題がある場合' do
@@ -77,7 +82,6 @@ RSpec.describe PurchaseShopping, type: :model do
     it 'cityがなければ保存できない' do
       @purchase_shopping.city = ''
       @purchase_shopping.valid?
-      # binding.pry
       expect(@purchase_shopping.errors.full_messages).to include("City can't be blank")
     end
 
@@ -137,6 +141,12 @@ RSpec.describe PurchaseShopping, type: :model do
 
     it 'phone_numberが半角英字だと保存できないこと' do
       @purchase_shopping.phone_number = 'aaabbbbcccc'
+      @purchase_shopping.valid?
+      expect(@purchase_shopping.errors.full_messages).to include('Phone number is invalid. Input only number')
+    end
+
+    it "phone_numberが英数混合では登録できないこと" do
+      @purchase_shopping.phone_number = '0942-77-001'
       @purchase_shopping.valid?
       expect(@purchase_shopping.errors.full_messages).to include('Phone number is invalid. Input only number')
     end
