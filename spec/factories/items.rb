@@ -9,5 +9,9 @@ FactoryBot.define do
     day_to_ship_id { Faker::Number.between(from: 2, to: 4) }
     price { Faker::Number.between(from: 300, to: 9_999_999) }
     association :user
+
+    after(:build) do |message|
+      message.image.attach(io: File.open('public/images/output-image1.png'), filename: 'test_image.png')
+    end
   end
 end
