@@ -1,7 +1,8 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
-  before_action :move_to_index, only: :index
   before_action :item_params, only: [:index, :create]
+  before_action :move_to_index, only: :index
+  
   def index
     @purchase_shopping = PurchaseShopping.new
   end
